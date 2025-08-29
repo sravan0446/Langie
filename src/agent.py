@@ -100,7 +100,7 @@ class LangGraphAgent:
         """
         query = state.get("query", "")
         # Simple logic: if the query is very short or contains a question, ask for clarification.
-        if len(query) < 20 or "?" in query:
+        if len(query) < 20:
             print("Decision: Clarification needed (query is short or contains a question).")
             return "ask"
         else:
