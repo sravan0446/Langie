@@ -66,7 +66,7 @@ python run_agent.py
 ```
 
 The script will run two predefined examples:
-1.  **Example 1**: A short, urgent query that demonstrates the "ask for clarification" and "escalation" paths.
+1.  **Example 1**: An urgent query that demonstrates the "escalation" path.
 2.  **Example 2**: A detailed query that demonstrates the automated resolution path without escalation.
 
 The console will display detailed logs for each stage of the workflow for both examples, followed by the final structured JSON payload.
