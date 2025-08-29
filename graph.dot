@@ -1,0 +1,49 @@
+// To render this file, install Graphviz (https://graphviz.org/download/)
+// and run the following command:
+// dot -Tpng graph.dot -o workflow.png
+
+digraph SupportAgent {
+    rankdir=TB;
+    node [shape=box, style="rounded,filled", fillcolor="#E3F2FD", fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=10];
+
+    // Define Nodes
+    START [shape=circle, fillcolor="#C8E6C9", label="Start"];
+    INTAKE [label="1. INTAKE"];
+    UNDERSTAND [label="2. UNDERSTAND"];
+    PREPARE [shape=diamond, fillcolor="#FFF9C4", label="3. PREPARE"];
+    ASK [label="4. ASK"];
+    WAIT [label="5. WAIT"];
+    RETRIEVE [label="6. RETRIEVE"];
+    DECIDE [shape=diamond, fillcolor="#FFCCBC", label="7. DECIDE"];
+    UPDATE [label="8. UPDATE"];
+    CREATE [label="9. CREATE"];
+    DO [label="10. DO"];
+    COMPLETE [label="11. COMPLETE"];
+    END [shape=circle, fillcolor="#FFCDD2", label="End"];
+
+    // Define Edges (Workflow Path)
+    START -> INTAKE;
+    INTAKE -> UNDERSTAND;
+    UNDERSTAND -> PREPARE;
+
+    // Conditional Path from PREPARE
+    PREPARE -> ASK [label="clarification needed"];
+    PREPARE -> RETRIEVE [label="no clarification needed"];
+
+    // Clarification Flow
+    ASK -> WAIT;
+    WAIT -> RETRIEVE;
+
+    // Main Flow to Decision
+    RETRIEVE -> DECIDE;
+
+    // Conditional Path from DECIDE
+    DECIDE -> UPDATE [label="escalate OR resolve"];
+
+    // Resolution/Escalation Flow
+    UPDATE -> CREATE;
+    CREATE -> DO;
+    DO -> COMPLETE;
+    COMPLETE -> END;
+}
